@@ -4,7 +4,13 @@ import {
 } from '@remix-run/dev'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import remixConfig from './remix.config'
+import { getLoadContext } from './load-context'
 
 export default defineConfig({
-	plugins: [remixCloudflareDevProxy(), remix(), tsconfigPaths()],
+	plugins: [
+		remixCloudflareDevProxy({ getLoadContext }),
+		remix(remixConfig),
+		tsconfigPaths(),
+	],
 })
